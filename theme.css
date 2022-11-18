@@ -1,0 +1,62 @@
+    /* *{color:green;
+    font-family:Monospace;
+    border:1px solid;
+          }       */
+  
+    #boxPvP{
+      padding-bottom:100px;
+      padding-left:20px;
+      border-style: solid;
+      background-color:blue;
+    }
+     button {
+       border-radius: 15px;
+       font: Sans 23;
+       color: #00008B;                                     
+       background-color: green;
+       background-image:none;
+    }
+     button:hover {
+       background-color: red;
+       color: white;
+    }
+     button:hover:active {
+       background-color: orange;
+       color: cyan;
+    }
+
+
+
+    #player_vs_player{
+      background-color: orange;
+      padding-top:100px;
+      margin-top: 200px;
+    }
+    #player_vs_computer_easy{
+      background-color: orange;
+      /*padding-top: 100px;*/
+      margin-top: 100px;
+    }
+    
+    #player_vs_computer_medium{
+      background-color: orange;
+      /*padding-top: 100px;*/
+      margin-top: 150px;
+    }
+    #player_vs_computer_hard{
+      background-color: orange;
+      /*padding-top: 100px;*/
+      margin-top: 200px;
+    }
+ 
+    #quit{
+      background-color: orange;
+      /*padding-top: 100px;*/
+      margin-top: 250px;
+    }
+
+    grid{
+      background-color:orange;
+      
+    }
+    
