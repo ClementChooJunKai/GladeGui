@@ -2,14 +2,16 @@
     font-family:Monospace;
     border:1px solid;
           }       */
-  
+
+
     #boxPvP{
-      padding-bottom:100px;
-      padding-left:20px;
-      border-style: solid;
+ 
+      outline-style: solid;
       background-color:blue;
+  
     }
-     button {
+
+     /*button {
        border-radius: 15px;
        font: Sans 23;
        color: #00008B;                                     
@@ -24,39 +26,139 @@
        background-color: orange;
        color: cyan;
     }
-
+    */
 
 
     #player_vs_player{
       background-color: orange;
-      padding-top:100px;
-      margin-top: 200px;
+      
+  
     }
     #player_vs_computer_easy{
       background-color: orange;
       /*padding-top: 100px;*/
-      margin-top: 100px;
+     
     }
     
     #player_vs_computer_medium{
       background-color: orange;
       /*padding-top: 100px;*/
-      margin-top: 150px;
+    
     }
     #player_vs_computer_hard{
       background-color: orange;
       /*padding-top: 100px;*/
-      margin-top: 200px;
+    
     }
  
     #quit{
       background-color: orange;
       /*padding-top: 100px;*/
-      margin-top: 250px;
+     
+    }
+   
+    grid{
+      
+
+  
+      background-color: #34495e;
+      color: #fff;
+      border: 6px solid #2c3e50;
+      border-radius: 10px;
+      
+ 
+    }
+    #ttc1{
+      border: 6px solid #2c3e50;
+      background-color:#57799b;
+      border-radius: 2px;
+     
+      font-weight: bold;
+      font-size: 4em;
+    
     }
 
-    grid{
-      background-color:orange;
-      
+    #ttc2{
+      border: 6px solid #2c3e50;
+      border-radius: 2px;
+     
+      font-weight: bold;
+      font-size: 4em;
+
+
     }
+
+    #ttc3{
+      border: 6px solid #2c3e50;
+      border-radius: 2px;
+      
+      font-weight: bold;
+      font-size: 4em;
+ 
+
+
+    }
+
+    #ttc4{
+      border: 6px solid #2c3e50;
+      border-radius: 2px;
+      
+      font-weight: bold;
+      font-size: 4em;
     
+
+
+    }
+
+    #ttc5{
+      border: 6px solid #2c3e50;
+      border-radius: 2px;
+    
+      font-weight: bold;
+      font-size: 4em;
+   
+
+
+    }
+
+    #ttc6{
+      border: 6px solid #2c3e50;
+      border-radius: 2px;
+      
+      font-weight: bold;
+      font-size: 4em;
+   
+
+
+    }
+
+    #ttc7{
+      border: 6px solid #2c3e50;
+      border-radius: 2px;
+      
+      font-weight: bold;
+      font-size: 4em;
+  
+
+    }
+    #ttc8{
+      border: 6px solid #2c3e50;
+      border-radius: 2px;
+      
+      font-weight: bold;
+      font-size: 4em;
+   
+
+
+    }
+    #ttc9{
+      border: 6px solid #2c3e50;
+      border-radius: 2px;
+      
+      font-weight: bold;
+      font-size: 4em;
+   
+
+    }
+
+
