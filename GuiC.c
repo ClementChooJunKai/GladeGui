@@ -26,7 +26,7 @@ GtkWidget *player1;
 GtkWidget *player2;
 GtkWidget *score1;
 GtkWidget *score2;
-
+GtkWidget *header;
 
 void hideMenu();
 int main (int argc,char *argv[]){
@@ -36,7 +36,7 @@ int main (int argc,char *argv[]){
     //Creating a window and styling of window
     window =gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(window),"Tic Tac Toe");
-    gtk_window_set_default_size(GTK_WINDOW(window),600,600);
+    gtk_window_set_default_size(GTK_WINDOW(window),700,700);
     gtk_window_set_position(GTK_WINDOW(window),GTK_WIN_POS_CENTER);
     gtk_window_set_resizable(GTK_WINDOW(window),FALSE);
     //gtk_window_set_decorated(GTK_WINDOW(window),FALSE);
@@ -86,6 +86,10 @@ int main (int argc,char *argv[]){
     gtk_widget_set_name(player_vs_computer_medium,"player_vs_computer_medium");
 
     
+    //Creating welcome page
+    header = gtk_label_new("TIC TAC TOE");
+    gtk_widget_set_name(header,"header");
+    gtk_container_add(GTK_CONTAINER(fixed),header);
 
     //Creating player 1,2 label
     player1 = gtk_label_new("player1");
@@ -150,7 +154,7 @@ int main (int argc,char *argv[]){
 
 
     gtk_fixed_move(GTK_FIXED(tttpage),player1,0,120);
-    gtk_fixed_move(GTK_FIXED(tttpage),player2,150,120);
+    gtk_fixed_move(GTK_FIXED(tttpage),player2,50,120);
     gtk_fixed_move(GTK_FIXED(tttpage),tttgrid,100,120);  
     
 
