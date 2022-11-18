@@ -8,7 +8,7 @@ GtkWidget *player_vs_computer_easy;
 GtkWidget *player_vs_computer_medium;
 GtkWidget *player_vs_computer_hard;
 GtkWidget *quit;
-GtkWidget *fixed;
+GtkWidget *MainBox;
 GtkWidget *tttpage;
 GtkWidget *tttgrid;
 GtkWidget *ttt1;
@@ -36,7 +36,7 @@ int main (int argc,char *argv[]){
     //Creating a window and styling of window
     window =gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(window),"Tic Tac Toe");
-    gtk_window_set_default_size(GTK_WINDOW(window),700,700);
+    gtk_window_set_default_size(GTK_WINDOW(window),800,600);
     gtk_window_set_position(GTK_WINDOW(window),GTK_WIN_POS_CENTER);
     gtk_window_set_resizable(GTK_WINDOW(window),FALSE);
     //gtk_window_set_decorated(GTK_WINDOW(window),FALSE);
@@ -44,21 +44,21 @@ int main (int argc,char *argv[]){
     image = gtk_image_new_from_file ("download.jfif");
 
 
-    //gtk_widget_show (fixed);
-    //creating a fixed container
-    fixed = gtk_fixed_new ();
+    //gtk_widget_show (MainBox);
+    //creating a MainBox container
+    MainBox = gtk_fixed_new();
     
-    gtk_widget_set_name(fixed,"fixed");
+    gtk_widget_set_name(MainBox,"MainBox");
     
-    gtk_container_add (GTK_CONTAINER (window), fixed);
+    gtk_container_add (GTK_CONTAINER (window), MainBox);
     
     //creating box container
     mainMenu = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
     //tttpage = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
-    tttpage = gtk_fixed_new();
-    gtk_container_add(GTK_CONTAINER(fixed),mainMenu);
+    tttpage = gtk_box_new(GTK_ORIENTATION_VERTICAL,0);
+    gtk_container_add(GTK_CONTAINER(MainBox),mainMenu);
     
-    gtk_container_add(GTK_CONTAINER (fixed), tttpage);
+    gtk_container_add(GTK_CONTAINER (MainBox), tttpage);
     gtk_widget_set_name(mainMenu,"mainMenu");
     gtk_widget_set_name(tttpage,"tttpage");
     
@@ -74,28 +74,30 @@ int main (int argc,char *argv[]){
     quit= gtk_button_new_with_label("Quit");
     g_signal_connect(quit,"clicked", G_CALLBACK(gtk_main_quit),NULL);
 
-    gtk_container_add(GTK_CONTAINER(mainMenu),player_vs_computer_easy);
-    gtk_widget_set_name(player_vs_computer_easy,"player_vs_computer_easy");
     gtk_container_add(GTK_CONTAINER(mainMenu),player_vs_player);
     gtk_widget_set_name(player_vs_player,"player_vs_player");
-    gtk_container_add(GTK_CONTAINER(mainMenu),quit);
-    gtk_widget_set_name(quit,"quit");
-    gtk_container_add(GTK_CONTAINER(mainMenu),player_vs_computer_hard);
-    gtk_widget_set_name(player_vs_computer_hard,"player_vs_computer_hard");
+    gtk_container_add(GTK_CONTAINER(mainMenu),player_vs_computer_easy);
+    gtk_widget_set_name(player_vs_computer_easy,"player_vs_computer_easy");
     gtk_container_add(GTK_CONTAINER(mainMenu),player_vs_computer_medium);
     gtk_widget_set_name(player_vs_computer_medium,"player_vs_computer_medium");
+    gtk_container_add(GTK_CONTAINER(mainMenu),player_vs_computer_hard);
+    gtk_widget_set_name(player_vs_computer_hard,"player_vs_computer_hard");
+    gtk_container_add(GTK_CONTAINER(mainMenu),quit);
+    gtk_widget_set_name(quit,"quit");
 
     
     //Creating welcome page
     header = gtk_label_new("TIC TAC TOE");
     gtk_widget_set_name(header,"header");
-    gtk_container_add(GTK_CONTAINER(fixed),header);
+    gtk_container_add(GTK_CONTAINER(MainBox),header);
 
     //Creating player 1,2 label
     player1 = gtk_label_new("player1");
     player2 = gtk_label_new("player2");
-    gtk_container_add(GTK_CONTAINER(tttpage),player1);
-    gtk_container_add(GTK_CONTAINER(tttpage),player2);
+    gtk_container_add(GTK_CONTAINER(MainBox),player1);
+    gtk_container_add(GTK_CONTAINER(MainBox),player2);
+    gtk_widget_set_name(player1,"player1");
+    gtk_widget_set_name(player2,"player2");
 
     //Tic tac toe page 
     //creating elements in page ttt
@@ -129,6 +131,7 @@ int main (int argc,char *argv[]){
     //gtk_button_set_image(GTK_BUTTON(ttt1),image);
 
 
+
     gtk_grid_set_row_homogeneous(GTK_GRID(tttgrid),TRUE);
     gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(ttt1),1,0,1,1);
     gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(ttt2),2,0,1,1);
@@ -140,22 +143,19 @@ int main (int argc,char *argv[]){
     gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(ttt8),2,2,1,1);
     gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(ttt9),3,2,1,1);
 
-
-
-
     //Moving elements
-    gtk_fixed_move(GTK_FIXED(fixed),tttpage,150,120);
-    //gtk_fixed_move(GTK_FIXED(mainMenu),player_vs_player,300,50);
-    //gtk_fixed_move(GTK_FIXED(mainMenu),player_vs_computer_easy,300,100);
-    //gtk_fixed_move(GTK_FIXED(mainMenu),player_vs_computer_medium,300,150);
-   // gtk_fixed_move(GTK_FIXED(mainMenu),player_vs_computer_hard,300,200);
-   // gtk_fixed_move(GTK_FIXED(mainMenu),quit,300,250);
+    // gtk_MainBox_move(GTK_MainBox(MainBox),tttpage,150,120);
+    // gtk_MainBox_move(GTK_MainBox(mainMenu),player_vs_player,300,50);
+    // gtk_MainBox_move(GTK_MainBox(mainMenu),player_vs_computer_easy,300,100);
+    // gtk_MainBox_move(GTK_MainBox(mainMenu),player_vs_computer_medium,300,150);
+    // gtk_MainBox_move(GTK_MainBox(mainMenu),player_vs_computer_hard,300,200);
+    // gtk_MainBox_move(GTK_MainBox(mainMenu),quit,300,250);
 
 
 
-    gtk_fixed_move(GTK_FIXED(tttpage),player1,0,120);
-    gtk_fixed_move(GTK_FIXED(tttpage),player2,50,120);
-    gtk_fixed_move(GTK_FIXED(tttpage),tttgrid,100,120);  
+   // gtk_MainBox_move(GTK_MainBox(tttpage),player1,0,120);
+    //gtk_MainBox_move(GTK_MainBox(tttpage),player2,50,120);
+    //gtk_MainBox_move(GTK_MainBox(tttpage),tttgrid,100,120);  
     
 
 
@@ -186,5 +186,8 @@ void hideMenu(){
 
         gtk_widget_hide(mainMenu);
         gtk_widget_show(tttpage);
+        gtk_widget_hide(header);
+        // gtk_widget_hide(player1);
+        // gtk_widget_hide(player2);
 }
 

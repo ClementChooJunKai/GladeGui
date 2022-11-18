@@ -5,175 +5,202 @@
   }       */
   
   window{
-    background-color: rgb(167, 111, 111);
+    background-color: black;
   }
         
     #header{
-      margin-left: 320px;
-      margin-top: 150px;
+      margin-left: 365px;
+      margin-top: 65px;
+      font-size: larger;
+      font-family: "Rockwell";
+      color:white
+
     }
     #mainMenu{
  
       outline-style: solid;
-      margin-top: 200px;
-      margin-left: 220px;
-      
-      padding-left: 30px;
-      padding-right: 30px;
+      margin-top:250px;
+      margin-left:300px;
     }
 
-     /*button {
-       border-radius: 15px;
-       font: Sans 23;
-       color: #00008B;                                     
-       background-color: green;
-       background-image:none;
-    }
-     button:hover {
-       background-color: red;
-       color: white;
-    }
-     button:hover:active {
-       background-color: orange;
-       color: cyan;
-    }
-    */
-
+   
 
     #player_vs_player{
-      background-color: orange;
+
+      font-family: "Rockwell";
+      color: white;
+      background: red;
       
-  
+    }
+
+    #player_vs_player:hover{
+      background:white;
+          color: rgb(0, 0, 0);
+
+
     }
     #player_vs_computer_easy{
-      background-color: orange;
+  
       /*padding-top: 100px;*/
-     
+      font-family: "Rockwell";
+      color: white;
+      background: red;
+
+    }
+    #player_vs_computer_easy:hover{
+      background:white;
+          color: rgb(0, 0, 0);
     }
     
     #player_vs_computer_medium{
-      background-color: orange;
+ 
       /*padding-top: 100px;*/
-    
+      font-family: "Rockwell";
+      color: white;
+      background: red
     }
+    #player_vs_computer_medium:hover{
+      background:white;
+          color: rgb(0, 0, 0);
+    }
+    
     #player_vs_computer_hard{
-      background-color: orange;
+ 
       /*padding-top: 100px;*/
-    
+      font-family: "Rockwell";
+      color: white;
+      background: red
     }
+    #player_vs_computer_hard:hover{
+      background:white;
+          color: rgb(0, 0, 0);
+    }
+    
  
     #quit{
-      background-color: orange;
+      font-family: "Rockwell";
       /*padding-top: 100px;*/
-     
+      color: white;
+      background: red
+    }
+    #quit:hover{
+      background:white;
+          color: rgb(0, 0, 0);
     }
    
     grid{
-      
-
   
-      background-color: #34495e;
       color: #fff;
-      border: 6px solid #2c3e50;
       border-radius: 10px;
-      
- 
+      margin-top: 120px;
+      margin-bottom: 200px;
+     
+      padding:50px;
+    
     }
     #tttpage{
-      background-color:rgb(226, 86, 5);
-
-    }
-    #ttc1{
-      border: 6px solid #2c3e50;
-      background-color:#57799b;
-      border-radius: 2px;
-     
-      font-weight: bold;
-      font-size: 4em;
     
-    }
+      margin-top: 150px;
 
-    #ttc2{
-      border: 6px solid #2c3e50;
-      border-radius: 2px;
+      margin-left: 280px ;
+    }
+    #ttt1{
+    
+      padding:25px;
+      font-weight: bold;
      
+    }
+
+    #ttt2{
+  
+  
+      padding:25px;
       font-weight: bold;
-      font-size: 4em;
+    
 
 
     }
 
-    #ttc3{
-      border: 6px solid #2c3e50;
-      border-radius: 2px;
+    #ttt3{
       
+   
+      padding:25px;
       font-weight: bold;
-      font-size: 4em;
+
  
 
 
     }
 
-    #ttc4{
-      border: 6px solid #2c3e50;
-      border-radius: 2px;
-      
+    #ttt4{
+    
+    
+      padding:25px;
       font-weight: bold;
-      font-size: 4em;
+      
     
 
 
     }
 
-    #ttc5{
-      border: 6px solid #2c3e50;
-      border-radius: 2px;
+    #ttt5{
     
+     
+      padding:25px;
       font-weight: bold;
-      font-size: 4em;
+      
+
+
+    }
+
+    #ttt6{
+      
+
+      padding:25px;
+      font-weight: bold;
+
    
 
 
     }
 
-    #ttc6{
-      border: 6px solid #2c3e50;
-      border-radius: 2px;
+    #ttt7{
+     
+      padding:25px;
       
       font-weight: bold;
-      font-size: 4em;
-   
-
-
-    }
-
-    #ttc7{
-      border: 6px solid #2c3e50;
-      border-radius: 2px;
-      
-      font-weight: bold;
-      font-size: 4em;
+     
   
 
     }
-    #ttc8{
-      border: 6px solid #2c3e50;
-      border-radius: 2px;
+    #ttt8{
+      
+      padding:25px;
       
       font-weight: bold;
-      font-size: 4em;
+
    
 
 
     }
-    #ttc9{
-      border: 6px solid #2c3e50;
-      border-radius: 2px;
+    #ttt9{
+  
       
+      padding:25px;
       font-weight: bold;
-      font-size: 4em;
+
    
 
     }
+    #player1{
+      margin-left: 210px;
+      color:white;
+      margin-top:300px;
 
-
+    }
+    #player2{
+      margin-left:580px;
+      color: white;
+      margin-top:300px;
+    }
+   
