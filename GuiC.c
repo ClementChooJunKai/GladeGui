@@ -31,7 +31,10 @@ GtkWidget *winner;
 GtkWidget *back;
 GtkWidget *reset;
 GtkWidget *restart;
+GtkWidget *optionbox;
+
 void hideMenu();
+void hidegrid();
 int main (int argc,char *argv[]){
     gtk_init(&argc,&argv);
   
@@ -117,16 +120,23 @@ int main (int argc,char *argv[]){
     gtk_container_add(GTK_CONTAINER(MainBox),winner);
     gtk_widget_set_name(winner,"winner");
 
-    //Back and reset button
+
+    optionbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
+    gtk_container_add(GTK_CONTAINER(MainBox),optionbox);
+    gtk_widget_set_name(optionbox,"optionbox");
+
+
     back = gtk_button_new_with_label("Back");
     reset = gtk_button_new_with_label("Reset");
     restart = gtk_button_new_with_label("Restart");
-    gtk_container_add(GTK_CONTAINER(MainBox),back);
-    gtk_container_add(GTK_CONTAINER(MainBox),reset);
-    gtk_container_add(GTK_CONTAINER(MainBox),restart);
+    gtk_container_add(GTK_CONTAINER(optionbox),back);
+    gtk_container_add(GTK_CONTAINER(optionbox),reset);
+    gtk_container_add(GTK_CONTAINER(optionbox),restart);
     gtk_widget_set_name(back,"back");
     gtk_widget_set_name(reset,"reset");
     gtk_widget_set_name(restart,"restart");
+
+    
 
     //Tic tac toe page 
     //creating elements in page ttt
@@ -195,16 +205,24 @@ int main (int argc,char *argv[]){
   
     g_signal_connect(window,"destroy",G_CALLBACK(gtk_main_quit),NULL);
     gtk_widget_show_all(window);
-   //gtk_widget_hide(mainMenu);
-    //gtk_widget_hide(tttpage);
+
+    gtk_widget_hide(tttpage);
+    gtk_widget_hide(player1);
+    gtk_widget_hide(player2);
+    gtk_widget_hide(score1);
+    gtk_widget_hide(score2);
+    gtk_widget_hide(winner);
+    gtk_widget_hide(back);
+    gtk_widget_hide(reset);
+    gtk_widget_hide(restart);
+
 
     g_signal_connect(player_vs_player,"clicked", G_CALLBACK(hideMenu),NULL);
     g_signal_connect(player_vs_computer_easy,"clicked", G_CALLBACK(hideMenu),NULL);
     g_signal_connect(player_vs_computer_medium,"clicked", G_CALLBACK(hideMenu),NULL);
     g_signal_connect(player_vs_computer_hard,"clicked", G_CALLBACK(hideMenu),NULL);
 
-    gtk_widget_hide(mainMenu);
-    gtk_widget_hide(header);
+    g_signal_connect(back,"clicked", G_CALLBACK(hidegrid),NULL);
 
     //gtk code comes here
     gtk_main();
@@ -215,10 +233,31 @@ int main (int argc,char *argv[]){
 
 void hideMenu(){
 
-        gtk_widget_hide(mainMenu);
-        gtk_widget_hide(header);
-        gtk_widget_show(tttpage);
-        // gtk_widget_hide(player1);
-        // gtk_widget_hide(player2);
+    gtk_widget_hide(mainMenu);
+    gtk_widget_hide(header);
+    gtk_widget_show(tttpage);
+    gtk_widget_show(player1);
+    gtk_widget_show(player2);
+    gtk_widget_show(score1);
+    gtk_widget_show(score2);
+    gtk_widget_show(winner);
+    gtk_widget_show(back);
+    gtk_widget_show(reset);
+    gtk_widget_show(restart);
+
 }
 
+void hidegrid(){
+    gtk_widget_show(mainMenu);
+    gtk_widget_show(header);
+    gtk_widget_hide(tttpage);
+    gtk_widget_hide(player1);
+    gtk_widget_hide(player2);
+    gtk_widget_hide(score1);
+    gtk_widget_hide(score2);
+    gtk_widget_hide(winner);
+    gtk_widget_hide(back);
+    gtk_widget_hide(reset);
+    gtk_widget_hide(restart);
+
+}
