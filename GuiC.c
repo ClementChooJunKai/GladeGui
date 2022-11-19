@@ -604,7 +604,14 @@ void announceWinner(int winner, int draw)
     }
     else if (winner == 1)
     {
-        gtk_label_set_label(GTK_LABEL(announce), "Player 2 has won!");
+        if (gamemode == 1 || gamemode == 2 || gamemode == 3)
+        {
+            gtk_label_set_label(GTK_LABEL(announce), "Computer has won!")
+        }
+        else
+        {
+            gtk_label_set_label(GTK_LABEL(announce), "Player 2 has won!");
+        }
         player_2_score = player_2_score + 1;
         gchar *display;
         display = g_strdup_printf("%d", player_2_score);
