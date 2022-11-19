@@ -7,12 +7,14 @@
   
 @import url('https://fonts.googleapis.com/css?family=VT323');
 
+
+
 window{
 background-color: grey;
 }
     
 #header{
-  font-family: 'VT323',monospace;
+  font-family: 'Slabo 27px',serif;
   font-size: 24px;
   background: #7C7C7C;
   border-bottom: 6px inset rgba(0,0,0,.5);
@@ -21,20 +23,20 @@ background-color: grey;
   border-top: 6px inset rgba(255,255,255,.5);
   color: rgb(0, 0, 0);
   font-size: 2.2rem;
-  margin-left:300px;
-  margin-top:20px;
+  margin-left:289px;
+  margin-top:70px;
   min-width: 200px;
   padding: .5rem;
 }
 #mainMenu{
 
   outline-style: solid;
-  margin-top:125px;
+  margin-top:175px;
   margin-left:200px;
 }
 
 #player_vs_player{
-  font-family: 'VT323',monospace;
+  font-family: 'Slabo 27px',serif;
   background: #cc0000 ;
   border-bottom: 6px inset rgba(0,0,0,.5);
   border-left: 6px inset rgba(0,0,0,.5);
@@ -50,7 +52,7 @@ background-color: grey;
   background:   #ff0000;
 }
 #player_vs_computer_easy{
-  font-family: "Monospace 15";
+  font-family:'Slabo 27px',serif;
   background: #f1c232;
   border-bottom: 6px inset rgba(0,0,0,.5);
   border-left: 6px inset rgba(0,0,0,.5);
@@ -67,7 +69,7 @@ background-color: grey;
 }
 
 #player_vs_computer_medium{
-  font-family: 'VT323';
+  font-family: 'Slabo 27px,serif';
   background: #38761d;
   border-bottom: 6px inset rgba(0,0,0,.5);
   border-left: 6px inset rgba(0,0,0,.5);
@@ -84,7 +86,7 @@ background-color: grey;
 }
 
 #player_vs_computer_hard{
-  font-family: 'VT323';
+  font-family: 'Slabo 27px',serif;
   background: #3d85c6;
   border-bottom: 6px inset rgba(0,0,0,.5);
   border-left: 6px inset rgba(0,0,0,.5);
@@ -102,7 +104,7 @@ background-color: grey;
 
 
 #quit{
-  font-family: 'VT323';
+  font-family: 'Slabo 27px',serif;
   background:#c27ba0;
   border-bottom: 6px inset rgba(0,0,0,.5);
   border-left: 6px inset rgba(0,0,0,.5);
@@ -126,115 +128,151 @@ grid{
 #tttpage{     
   margin-top: 150px;
   margin-bottom: 200px;
-  margin-left: 260px ;
+  margin-left: 252px ;
+
 
 }
 #button1{
   padding:30px;
   font-weight: bold;
   background: transparent;
-  border-color:grey;
-  color:white;
+  border-color:black;
+  border-left-color: transparent;
+  border-top-color: transparent;
+  border-width: 5px;
+  color:black;
+  font-size: x-large;
 }
 
 #button2{
   padding:30px;
   font-weight: bold;
   background: transparent;
-  border-color:grey;
-  color:white;
+  border-color:black;
+  border-top-color: transparent;
+  border-width: 5px;
+  color:black;
+  font-size: x-large;
 }
 
 #button3{
   padding:30px;
   font-weight: bold;
   background: transparent;
-  border-color:grey;
-  color:white;
+  border-color:black;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  border-width: 5px;
+  color:black;
+  font-size: x-large;
 }
 
 #button4{   
   padding:30px;
   font-weight: bold;
   background: transparent;
-  border-color:grey;
-  color:white;
+  border-color:black;
+  border-left-color: transparent;
+  border-width: 5px;
+  color:black;
+  font-size: x-large;
 }
 
 #button5{
   padding:30px;
   font-weight: bold;
   background: transparent;
-  border-color:grey;
-  color:white;
+  border-color:black;
+  border-width: 5px;
+  color:black;
+  font-size: x-large;
 }
 
 #button6{
   padding:30px;
   font-weight: bold;
   background: transparent;
-  border-color:grey;
-  color:white;
+  border-color:black;
+  border-right-color: transparent;
+  border-width: 5px;
+  color:black;
+  font-size: x-large;
 }
 
 #button7{  
   padding:30px;      
   font-weight: bold;
   background: transparent;
-  border-color:grey;
-  color:white;
+  border-color:black;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-width: 5px;
+  color:black;
+  font-size: x-large;
 }
 #button8{
   padding:30px;  
   font-weight: bold;
   background: transparent;
-  border-color:grey;
-  color:white;
+  border-color:black;
+  border-bottom-color: transparent;
+  border-width: 5px;
+  color:black;
+  font-size: x-large;
 }
 #button9{
   padding:30px;
   font-weight: bold;
   background: transparent;
-  border-color:grey;
-  color:white;
+  border-color:black;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  border-width: 5px;
+  color:black;
+  font-size: x-large;
 }
 #player1{
-  margin-left: 145px;
-  color:white;
+  margin-left: 120px;
+  color:black;
   margin-top:220px;
   font-size: x-large;
   font-weight:bolder;
+  font-family: 'Slabo 27px',serif;
 }
 #player2{
   margin-left:595px;
-  color: white;
+  color: black;
   margin-top:220px;
   font-size: x-large;
   font-weight:bolder;
+  font-family: 'Slabo 27px',serif;
 }
 #score1{
-  margin-left: 170px;
-  color:white;
+  margin-left: 155px;
+  color:black;
   margin-top:280px;
   font-size: x-large;
   font-weight:bolder;
+  font-family: 'Slabo 27px',serif;
 }
 #score2{
-  margin-left:620px;
-  color: white;
+  margin-left:610px;
+  color: black;
   margin-top:280px;
   font-size: x-large;
   font-weight:bolder;
+  font-family: 'Slabo 27px',serif;
 }
 #winner{
-  margin-left: 375px;
+  margin-left: 330px;
   margin-top: 100px;
-  color:white;
+  color:black;
   font-size: x-large;
   font-weight:bolder;
+  font-family: 'Slabo 27px',serif;
 }
 #back{
-  font-family: "Monospace 15";
+  font-family: 'Slabo 27px',serif;
   background: green;
   border-bottom: 6px inset rgba(0,0,0,.5);
   border-left: 6px inset rgba(0,0,0,.5);
@@ -246,9 +284,12 @@ grid{
   min-width:100px;
   padding: .5rem;
 }
+#back:hover{
+  background: #00ff00;
+}
 #reset{
   margin-left:20px;
-  font-family: "Monospace 15";
+  font-family: 'Slabo 27px',serif;
   background: green;
   border-bottom: 6px inset rgba(0,0,0,.5);
   border-left: 6px inset rgba(0,0,0,.5);
@@ -258,10 +299,13 @@ grid{
   font-size: 2.2rem;
   min-width: 100px;
   padding: .5rem;
+}
+#reset:hover{
+  background: #00ff00;
 }
 #restart{
   margin-left:20px;
-  font-family: "Monospace 15";
+  font-family: 'Slabo 27px',serif;
   background: green;
   border-bottom: 6px inset rgba(0,0,0,.5);
   border-left: 6px inset rgba(0,0,0,.5);
@@ -272,7 +316,10 @@ grid{
   min-width: 100px;
   padding: .5rem;
 }
+#restart:hover{
+  background: #00ff00;
+}
 #optionbox{
-  margin-left: 220px;
+  margin-left: 190px;
   margin-top:550px;
 }

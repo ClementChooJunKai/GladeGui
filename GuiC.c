@@ -120,9 +120,9 @@ int main (int argc,char *argv[]){
     //Main Menu
     //creating elements in main menu 
     player_vs_player = gtk_button_new_with_label("Player Vs Player");
-    player_vs_computer_easy = gtk_button_new_with_label("Player Versus Computer(Easy)");
-    player_vs_computer_medium = gtk_button_new_with_label("Player Versus Computer(Medium)");
-    player_vs_computer_hard = gtk_button_new_with_label("Player Versus Computer(Hard)");
+    player_vs_computer_easy = gtk_button_new_with_label("Player Vs Computer(Easy)");
+    player_vs_computer_medium = gtk_button_new_with_label("Player Vs Computer(Medium)");
+    player_vs_computer_hard = gtk_button_new_with_label("Player Vs Computer(Hard)");
 
 
     quit= gtk_button_new_with_label("Quit");
@@ -310,7 +310,7 @@ void changeGamemode(GtkWidget *widget, gpointer data)
         gamemode = 1;
         setAIDifficulty();
         hideMenu();
-        gtk_label_set_label(GTK_LABEL(player2), "Computer (Easy)");
+        gtk_label_set_label(GTK_LABEL(player2), "Easy");
         resetBoard();
     }
     else if (*ptr_gamemode == '2')
@@ -318,7 +318,7 @@ void changeGamemode(GtkWidget *widget, gpointer data)
         gamemode = 2;
         setAIDifficulty();
         hideMenu();
-        gtk_label_set_label(GTK_LABEL(player2), "Computer (Medium)");
+        gtk_label_set_label(GTK_LABEL(player2), "Medium");
         resetBoard();
     }
     else if (*ptr_gamemode == '3')
@@ -326,7 +326,7 @@ void changeGamemode(GtkWidget *widget, gpointer data)
         gamemode = 3;
         setAIDifficulty();
         hideMenu();
-        gtk_label_set_label(GTK_LABEL(player2), "Computer (Hard)");
+        gtk_label_set_label(GTK_LABEL(player2), "Hard");
         resetBoard();
     }
 }
@@ -595,7 +595,7 @@ void announceWinner(int winner, int draw)
 {
     if (winner == -1)
     {
-        gtk_label_set_label(GTK_LABEL(announce), "Player 1 has won!");
+        gtk_label_set_label(GTK_LABEL(announce), "Player 1 wins!");
         player_1_score = player_1_score + 1;
         gchar *display;
         display = g_strdup_printf("%d", player_1_score);
@@ -607,11 +607,11 @@ void announceWinner(int winner, int draw)
     {
         if (gamemode == 1 || gamemode == 2 || gamemode == 3)
         {
-            gtk_label_set_label(GTK_LABEL(announce), "Computer has won!");
+            gtk_label_set_label(GTK_LABEL(announce), "Computer wins!");
         }
         else
         {
-            gtk_label_set_label(GTK_LABEL(announce), "Player 2 has won!");
+            gtk_label_set_label(GTK_LABEL(announce), "Player 2 wins!");
         }
         player_2_score = player_2_score + 1;
         gchar *display;
