@@ -183,6 +183,7 @@ int main (int argc,char *argv[]){
     gtk_widget_set_name(back,"back");
     gtk_widget_set_name(reset,"reset");
     gtk_widget_set_name(restart,"restart");
+    gtk_widget_set_halign(GTK_CONTAINER(optionbox), GTK_ALIGN_CENTER);
 
     
 
