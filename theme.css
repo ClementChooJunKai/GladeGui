@@ -23,16 +23,20 @@
       margin-left:300px;
     }
 
-   
-
     #player_vs_player{
-      display: block;
-      font-family: "Work Sans", sans-serif;
-      color: black;
-      background: white;
+
+      font-family: "Rockwell";
+      color: white;
+      background: red;
       
     }
 
+    #player_vs_player:hover{
+      background:white;
+          color: rgb(0, 0, 0);
+
+
+    }
     #player_vs_computer_easy{
   
       /*padding-top: 100px;*/
@@ -41,6 +45,11 @@
       background: red;
 
     }
+    #player_vs_computer_easy:hover{
+      background:white;
+          color: rgb(0, 0, 0);
+    }
+    
     #player_vs_computer_medium{
  
       /*padding-top: 100px;*/
@@ -68,7 +77,7 @@
  
     #quit{
       font-family: "Rockwell";
-      /*padding-top: 100px; */
+      /*padding-top: 100px;*/
       color: white;
       background: red
     }
@@ -78,118 +87,133 @@
     }
    
     grid{
-  
-      color: #fff;
-      border-radius: 10px;
-      margin-top: 120px;
-      margin-bottom: 200px;
-     
-      padding:50px;
-    
+      margin-top: 50px;
+      margin-right:30px;
+      margin-left:20px;
     }
-    #tttpage{
-    
+    #tttpage{     
       margin-top: 150px;
-
-      margin-left: 280px ;
-    }
-    #ttt1{
-    
-      padding:25px;
-      font-weight: bold;
-     
-    }
-
-    #ttt2{
-  
-  
-      padding:25px;
-      font-weight: bold;
-    
-
+      margin-bottom: 200px;
+      margin-left: 260px ;
 
     }
-
-    #ttt3{
-      
-   
-      padding:25px;
+    #button1{
+      padding:30px;
       font-weight: bold;
-
- 
-
-
+      background: transparent;
+      border-color:grey;
+      color:white;
     }
 
-    #ttt4{
-    
-    
-      padding:25px;
+    #button2{
+      padding:30px;
       font-weight: bold;
-      
-    
-
-
+      background: transparent;
+      border-color:grey;
+      color:white;
     }
 
-    #ttt5{
-    
-     
-      padding:25px;
+    #button3{
+      padding:30px;
       font-weight: bold;
-      
-
-
+      background: transparent;
+      border-color:grey;
+      color:white;
     }
 
-    #ttt6{
-      
-
-      padding:25px;
+    #button4{   
+      padding:30px;
       font-weight: bold;
-
-   
-
-
+      background: transparent;
+      border-color:grey;
+      color:white;
     }
 
-    #ttt7{
-     
-      padding:25px;
-      
+    #button5{
+      padding:30px;
       font-weight: bold;
-     
-  
-
+      background: transparent;
+      border-color:grey;
+      color:white;
     }
-    #ttt8{
-      
-      padding:25px;
-      
+
+    #button6{
+      padding:30px;
       font-weight: bold;
-
-   
-
-
+      background: transparent;
+      border-color:grey;
+      color:white;
     }
-    #ttt9{
-  
-      
-      padding:25px;
+
+    #button7{  
+      padding:30px;      
       font-weight: bold;
-
-   
-
+      background: transparent;
+      border-color:grey;
+      color:white;
+    }
+    #button8{
+      padding:30px;  
+      font-weight: bold;
+      background: transparent;
+      border-color:grey;
+      color:white;
+    }
+    #button9{
+      padding:30px;
+      font-weight: bold;
+      background: transparent;
+      border-color:grey;
+      color:white;
     }
     #player1{
-      margin-left: 210px;
+      margin-left: 145px;
       color:white;
-      margin-top:300px;
-
+      margin-top:220px;
+      font-size: x-large;
+      font-weight:bolder;
     }
     #player2{
-      margin-left:580px;
+      margin-left:595px;
       color: white;
-      margin-top:300px;
+      margin-top:220px;
+      font-size: x-large;
+      font-weight:bolder;
     }
-   
+    #score1{
+      margin-left: 170px;
+      color:white;
+      margin-top:280px;
+      font-size: x-large;
+      font-weight:bolder;
+    }
+    #score2{
+      margin-left:620px;
+      color: white;
+      margin-top:280px;
+      font-size: x-large;
+      font-weight:bolder;
+    }
+    #winner{
+      margin-left: 375px;
+      margin-top: 100px;
+      color:white;
+      font-size: x-large;
+      font-weight:bolder;
+    }
+    #back{
+      color:black;
+    }
+    #reset{
+      margin-left:20px;
+      color:black;
+    }
+    #restart{
+      margin-left:20px;
+      color:black;
+    }
+    #optionbox{
+      margin-left: 285px;
+      margin-top:550px;
+
+    }
