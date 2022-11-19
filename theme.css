@@ -26,19 +26,13 @@
    
 
     #player_vs_player{
-
-      font-family: "Rockwell";
-      color: white;
-      background: blueviolet;
+      display: block;
+      font-family: "Work Sans", sans-serif;
+      color: black;
+      background: white;
       
     }
 
-    #player_vs_player:hover{
-      background:white;
-          color: rgb(0, 0, 0);
-
-
-    }
     #player_vs_computer_easy{
   
       /*padding-top: 100px;*/
@@ -47,11 +41,6 @@
       background: red;
 
     }
-    #player_vs_computer_easy:hover{
-      background:white;
-          color: rgb(0, 0, 0);
-    }
-    
     #player_vs_computer_medium{
  
       /*padding-top: 100px;*/
@@ -79,7 +68,7 @@
  
     #quit{
       font-family: "Rockwell";
-      /*padding-top: 100px;*/
+      /*padding-top: 100px; */
       color: white;
       background: red
     }
