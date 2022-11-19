@@ -1,5 +1,26 @@
 #include <gtk/gtk.h>
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <glib/gstdio.h>
+
+
+/* Constant Variables */
+#define PLAYER 'X'
+#define COMPUTER 'O'
+
+char board[3][3];
+int turncounter;
+int player_1_score;
+int player_2_score;
+int gamemode;
+int bestMove[2];
+float aiPercentage;
+int row;
+int column;
+int check_winner;
+int check_draw;
 
 GtkWidget *window;
 GtkWidget *mainMenu;
@@ -11,23 +32,23 @@ GtkWidget *quit;
 GtkWidget *MainBox;
 GtkWidget *tttpage;
 GtkWidget *tttgrid;
-GtkWidget *ttt1;
+GtkWidget *button1;
 GtkWidget *child1;
-GtkWidget *ttt2;
-GtkWidget *ttt3;
-GtkWidget *ttt4;
-GtkWidget *ttt5;
-GtkWidget *ttt6;
-GtkWidget *ttt7;
-GtkWidget *ttt8;
-GtkWidget *ttt9;
+GtkWidget *button2;
+GtkWidget *button3;
+GtkWidget *button4;
+GtkWidget *button5;
+GtkWidget *button6;
+GtkWidget *button7;
+GtkWidget *button8;
+GtkWidget *button9;
 GtkWidget *image;
 GtkWidget *player1;
 GtkWidget *player2;
 GtkWidget *score1;
 GtkWidget *score2;
 GtkWidget *header;
-GtkWidget *winner;
+GtkWidget *announce;
 GtkWidget *back;
 GtkWidget *reset;
 GtkWidget *restart;
@@ -35,6 +56,32 @@ GtkWidget *optionbox;
 
 void hideMenu();
 void hidegrid();
+void changeGamemode(GtkWidget *widget, gpointer data);
+void playerMove(GtkWidget *widget, gpointer data);
+void computerMove();
+int checkFreeSpaces();
+int draw(int freeSpaces);
+void printBoard();
+int checkWinner();
+void setAIdifficulty();
+void initializeGUI();
+void resetBoard();
+void disableButtons();
+void destroy(GtkWidget *widget, gpointer data);
+void announceWinner(int winner, int draw);
+int evaluate();
+int minimax(int depth, int isMax);
+void findBestMove();
+int max(int num1, int num2);
+int min(int num1, int num2);
+void setAIDifficulty();
+int getAIDecision();
+int checkWinner();
+int checkFreeSpaces();
+void resetGame();
+void resetBoard();
+
+
 int main (int argc,char *argv[]){
     gtk_init(&argc,&argv);
   
@@ -77,8 +124,10 @@ int main (int argc,char *argv[]){
     player_vs_computer_medium = gtk_button_new_with_label("Player Versus Computer(Medium)");
     player_vs_computer_hard = gtk_button_new_with_label("Player Versus Computer(Hard)");
 
+
     quit= gtk_button_new_with_label("Quit");
     g_signal_connect(quit,"clicked", G_CALLBACK(gtk_main_quit),NULL);
+    
 
     gtk_container_add(GTK_CONTAINER(mainMenu),player_vs_player);
     gtk_widget_set_name(player_vs_player,"player_vs_player");
@@ -90,7 +139,6 @@ int main (int argc,char *argv[]){
     gtk_widget_set_name(player_vs_computer_hard,"player_vs_computer_hard");
     gtk_container_add(GTK_CONTAINER(mainMenu),quit);
     gtk_widget_set_name(quit,"quit");
-
     
     //Creating welcome page
     header = gtk_label_new("TIC TAC TOE");
@@ -116,9 +164,9 @@ int main (int argc,char *argv[]){
 
 
     //Announce winner label
-    winner = gtk_label_new("Winner");
-    gtk_container_add(GTK_CONTAINER(MainBox),winner);
-    gtk_widget_set_name(winner,"winner");
+    announce = gtk_label_new("Winner");
+    gtk_container_add(GTK_CONTAINER(MainBox),announce);
+    gtk_widget_set_name(announce,"winner");
 
 
     optionbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0);
@@ -127,8 +175,8 @@ int main (int argc,char *argv[]){
 
 
     back = gtk_button_new_with_label("Back");
-    reset = gtk_button_new_with_label("Reset");
-    restart = gtk_button_new_with_label("Restart");
+    reset = gtk_button_new_with_label("Restart");
+    restart = gtk_button_new_with_label("Reset Score");
     gtk_container_add(GTK_CONTAINER(optionbox),back);
     gtk_container_add(GTK_CONTAINER(optionbox),reset);
     gtk_container_add(GTK_CONTAINER(optionbox),restart);
@@ -145,57 +193,42 @@ int main (int argc,char *argv[]){
     gtk_container_add(GTK_CONTAINER(tttpage),tttgrid);
     
 
-    ttt1 = gtk_button_new_with_label("ttt1");
-    ttt2 = gtk_button_new_with_label("ttt2");
-    ttt3 = gtk_button_new_with_label("ttt3");
-    ttt4 = gtk_button_new_with_label("ttt4");
-    ttt5 = gtk_button_new_with_label("ttt5");
-    ttt6 = gtk_button_new_with_label("ttt6");
-    ttt7 = gtk_button_new_with_label("ttt7");
-    ttt8 = gtk_button_new_with_label("ttt8");
-    ttt9 = gtk_button_new_with_label("ttt9");
+    button1 = gtk_button_new();
+    button2 = gtk_button_new();
+    button3 = gtk_button_new();
+    button4 = gtk_button_new();
+    button5 = gtk_button_new();
+    button6 = gtk_button_new();
+    button7 = gtk_button_new();
+    button8 = gtk_button_new();
+    button9 = gtk_button_new();
 
-    gtk_widget_set_name(ttt1,"ttt1");
-    gtk_widget_set_name(ttt2,"ttt2");
-    gtk_widget_set_name(ttt3,"ttt3");
-    gtk_widget_set_name(ttt4,"ttt4");
-    gtk_widget_set_name(ttt5,"ttt5");
-    gtk_widget_set_name(ttt6,"ttt6");
-    gtk_widget_set_name(ttt7,"ttt7");
-    gtk_widget_set_name(ttt8,"ttt8");
-    gtk_widget_set_name(ttt9,"ttt9");
+    gtk_widget_set_name(button1,"button1");
+    gtk_widget_set_name(button2,"button2");
+    gtk_widget_set_name(button3,"button3");
+    gtk_widget_set_name(button4,"button4");
+    gtk_widget_set_name(button5,"button5");
+    gtk_widget_set_name(button6,"button6");
+    gtk_widget_set_name(button7,"button7");
+    gtk_widget_set_name(button8,"button8");
+    gtk_widget_set_name(button9,"button9");
 
     //adding image to button
-    //gtk_button_set_always_show_image (GTK_BUTTON (ttt1), TRUE);
-    //gtk_button_set_image(GTK_BUTTON(ttt1),image);
+    //gtk_button_set_always_show_image (GTK_BUTTON (button1), TRUE);
+    //gtk_button_set_image(GTK_BUTTON(button1),image);
 
 
 
     gtk_grid_set_row_homogeneous(GTK_GRID(tttgrid),TRUE);
-    gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(ttt1),1,0,1,1);
-    gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(ttt2),2,0,1,1);
-    gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(ttt3),3,0,1,1);
-    gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(ttt4),1,1,1,1);
-    gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(ttt5),2,1,1,1);
-    gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(ttt6),3,1,1,1);
-    gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(ttt7),1,2,1,1);
-    gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(ttt8),2,2,1,1);
-    gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(ttt9),3,2,1,1);
-
-    //Moving elements
-    // gtk_MainBox_move(GTK_MainBox(MainBox),tttpage,150,120);
-    // gtk_MainBox_move(GTK_MainBox(mainMenu),player_vs_player,300,50);
-    // gtk_MainBox_move(GTK_MainBox(mainMenu),player_vs_computer_easy,300,100);
-    // gtk_MainBox_move(GTK_MainBox(mainMenu),player_vs_computer_medium,300,150);
-    // gtk_MainBox_move(GTK_MainBox(mainMenu),player_vs_computer_hard,300,200);
-    // gtk_MainBox_move(GTK_MainBox(mainMenu),quit,300,250);
-
-
-
-   // gtk_MainBox_move(GTK_MainBox(tttpage),player1,0,120);
-    //gtk_MainBox_move(GTK_MainBox(tttpage),player2,50,120);
-    //gtk_MainBox_move(GTK_MainBox(tttpage),tttgrid,100,120);  
-    
+    gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(button1),1,0,1,1);
+    gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(button2),2,0,1,1);
+    gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(button3),3,0,1,1);
+    gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(button4),1,1,1,1);
+    gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(button5),2,1,1,1);
+    gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(button6),3,1,1,1);
+    gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(button7),1,2,1,1);
+    gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(button8),2,2,1,1);
+    gtk_grid_attach(GTK_GRID(tttgrid),GTK_BUTTON(button9),3,2,1,1);
 
 
     GtkCssProvider *cssProvider = gtk_css_provider_new();
@@ -211,18 +244,31 @@ int main (int argc,char *argv[]){
     gtk_widget_hide(player2);
     gtk_widget_hide(score1);
     gtk_widget_hide(score2);
-    gtk_widget_hide(winner);
+    gtk_widget_hide(announce);
     gtk_widget_hide(back);
     gtk_widget_hide(reset);
     gtk_widget_hide(restart);
 
+    
+    g_signal_connect(player_vs_player, "clicked", G_CALLBACK(changeGamemode), "0");
+    g_signal_connect(player_vs_computer_easy, "clicked", G_CALLBACK(changeGamemode), "1");
+    g_signal_connect(player_vs_computer_medium, "clicked", G_CALLBACK(changeGamemode), "2");
+    g_signal_connect(player_vs_computer_hard, "clicked", G_CALLBACK(changeGamemode), "3");
 
-    g_signal_connect(player_vs_player,"clicked", G_CALLBACK(hideMenu),NULL);
-    g_signal_connect(player_vs_computer_easy,"clicked", G_CALLBACK(hideMenu),NULL);
-    g_signal_connect(player_vs_computer_medium,"clicked", G_CALLBACK(hideMenu),NULL);
-    g_signal_connect(player_vs_computer_hard,"clicked", G_CALLBACK(hideMenu),NULL);
+    g_signal_connect(button1, "clicked", G_CALLBACK(playerMove), &board[0][0]);
+    g_signal_connect(button2, "clicked", G_CALLBACK(playerMove), &board[0][1]);
+    g_signal_connect(button3, "clicked", G_CALLBACK(playerMove), &board[0][2]);
+    g_signal_connect(button4, "clicked", G_CALLBACK(playerMove), &board[1][0]);
+    g_signal_connect(button5, "clicked", G_CALLBACK(playerMove), &board[1][1]);
+    g_signal_connect(button6, "clicked", G_CALLBACK(playerMove), &board[1][2]);
+    g_signal_connect(button7, "clicked", G_CALLBACK(playerMove), &board[2][0]);
+    g_signal_connect(button8, "clicked", G_CALLBACK(playerMove), &board[2][1]);
+    g_signal_connect(button9, "clicked", G_CALLBACK(playerMove), &board[2][2]);
 
     g_signal_connect(back,"clicked", G_CALLBACK(hidegrid),NULL);
+    g_signal_connect(reset,"clicked", G_CALLBACK(resetBoard),NULL);
+    g_signal_connect(restart,"clicked", G_CALLBACK(resetGame),NULL);
+    
 
     //gtk code comes here
     gtk_main();
@@ -240,11 +286,48 @@ void hideMenu(){
     gtk_widget_show(player2);
     gtk_widget_show(score1);
     gtk_widget_show(score2);
-    gtk_widget_show(winner);
+    gtk_widget_show(announce);
     gtk_widget_show(back);
     gtk_widget_show(reset);
     gtk_widget_show(restart);
 
+}
+
+void changeGamemode(GtkWidget *widget, gpointer data)
+{
+    char* ptr_gamemode = data;
+
+    if (*ptr_gamemode == '0')
+    {
+        gamemode = 0;
+        hideMenu();
+        gtk_label_set_label(GTK_LABEL(player2), "Player 2");
+        resetBoard();
+    }
+    else if (*ptr_gamemode == '1')
+    {
+        gamemode = 1;
+        setAIDifficulty();
+        hideMenu();
+        gtk_label_set_label(GTK_LABEL(player2), "Computer (Easy)");
+        resetBoard();
+    }
+    else if (*ptr_gamemode == '2')
+    {
+        gamemode = 2;
+        setAIDifficulty();
+        hideMenu();
+        gtk_label_set_label(GTK_LABEL(player2), "Computer (Medium)");
+        resetBoard();
+    }
+    else if (*ptr_gamemode == '3')
+    {
+        gamemode = 3;
+        setAIDifficulty();
+        hideMenu();
+        gtk_label_set_label(GTK_LABEL(player2), "Computer (Hard)");
+        resetBoard();
+    }
 }
 
 void hidegrid(){
@@ -255,9 +338,503 @@ void hidegrid(){
     gtk_widget_hide(player2);
     gtk_widget_hide(score1);
     gtk_widget_hide(score2);
-    gtk_widget_hide(winner);
+    gtk_widget_hide(announce);
     gtk_widget_hide(back);
     gtk_widget_hide(reset);
     gtk_widget_hide(restart);
+    resetGame();
+}
 
+void playerMove(GtkWidget *widget, gpointer data)
+{
+    /* Pointer to the Board Array */
+    char* ptr_board = data;
+
+    /* Check if the space is occupied */
+    if (*ptr_board == 'X' || *ptr_board == 'O')
+    {
+        printf("\nInvalid Move!\n");
+        return;
+    }
+
+    if (gamemode == 0)
+    {
+        if (turncounter % 2 == 0 || turncounter == 0)
+        {
+            *ptr_board = PLAYER;
+            gtk_button_set_label(GTK_BUTTON(widget), "X");
+            turncounter = turncounter + 1;
+
+        }
+        else if (turncounter % 2 == 1 && gamemode == 0)
+        {
+            *ptr_board = COMPUTER;
+            gtk_button_set_label(GTK_BUTTON(widget), "O");
+            turncounter = turncounter + 1;
+        }
+        check_winner = checkWinner();
+        check_draw = draw(checkFreeSpaces());
+        announceWinner(check_winner, check_draw);
+    }
+
+    if (gamemode == 1 || gamemode == 2 || gamemode == 3)
+    {
+        *ptr_board = PLAYER;
+        gtk_button_set_label(GTK_BUTTON(widget), "X");
+        turncounter = turncounter + 1;
+        check_winner = checkWinner();
+        check_draw = draw(checkFreeSpaces());
+        announceWinner(check_winner, check_draw);
+
+        if (check_winner == 0 && check_draw == 0)
+        {
+            computerMove();
+            turncounter = turncounter + 1;
+            check_winner = checkWinner();
+            check_draw = draw(checkFreeSpaces());
+            announceWinner(check_winner, check_draw);
+        }
+    }
+
+    printBoard();
+}
+
+void computerMove()
+{
+    int ai_decision = getAIDecision();
+    printf("\n%d", ai_decision);
+    int ai_row, ai_column;
+    int x, y;
+
+    if (ai_decision == 1)
+    {
+        findBestMove();
+        ai_row = bestMove[0];
+        ai_column = bestMove[1];
+    }
+    else if (ai_decision == 0)
+    {
+        do
+        {
+            x = rand() % 3;
+            y = rand() % 3;
+        } while (strlen(&board[x][y]) != 0);
+        
+        ai_row = x;
+        ai_column = y;
+    }
+
+    board[ai_row][ai_column] = COMPUTER;
+    if (ai_row == 0 && ai_column == 0)
+    {
+        gtk_button_set_label(GTK_BUTTON(button1), "O");
+    }
+    else if (ai_row == 0 && ai_column == 1)
+    {
+        gtk_button_set_label(GTK_BUTTON(button2), "O");
+    }
+    else if (ai_row == 0 && ai_column == 2)
+    {
+        gtk_button_set_label(GTK_BUTTON(button3), "O");
+    }
+    else if (ai_row == 1 && ai_column == 0)
+    {
+        gtk_button_set_label(GTK_BUTTON(button4), "O");
+    }
+    else if (ai_row == 1 && ai_column == 1)
+    {
+        gtk_button_set_label(GTK_BUTTON(button5), "O");
+    }
+    else if (ai_row == 1 && ai_column == 2)
+    {
+        gtk_button_set_label(GTK_BUTTON(button6), "O");
+    }
+    else if (ai_row == 2 && ai_column == 0)
+    {
+        gtk_button_set_label(GTK_BUTTON(button7), "O");
+    }
+    else if (ai_row == 2 && ai_column == 1)
+    {
+        gtk_button_set_label(GTK_BUTTON(button8), "O");
+    }
+    else if (ai_row == 2 && ai_column == 2)
+    {
+        gtk_button_set_label(GTK_BUTTON(button9), "O");
+    }
+}
+
+int checkFreeSpaces()
+{
+    int freeSpaces = 9;
+
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            if (strlen(&board[i][j]) != 0)
+            {
+                freeSpaces = freeSpaces - 1;
+            }
+        }
+    }
+
+    return freeSpaces;
+}
+
+int draw(int freeSpaces)
+{
+    if (freeSpaces == 0)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+void printBoard()
+{
+    printf("\n");
+    printf(" %c  | %c   | %c ", board[0][0], board[0][1], board[0][2]);
+    printf("\n--- | --- | --- \n ");
+    printf(" %c | %c   | %c ", board[1][0], board[1][1], board[1][2]);
+    printf("\n--- | --- | --- \n ");
+    printf(" %c | %c   | %c ", board[2][0], board[2][1], board[2][2]);
+    printf("\n--- | --- | --- \n ");
+    printf("\n");
+}
+
+int checkWinner()
+{
+    /* 
+    Check every row to see if there is a Winning Combination
+    */
+    for (int row = 0; row < 3; ++row){
+        if (board[row][0] == board[row][1] && board[row][1] == board[row][2] && strlen(&board[row][0]) != 0){
+            if (board[row][0] == PLAYER){
+                return -1;
+            }
+            else if (board[row][0] == COMPUTER){
+                return 1;
+            }
+        }
+    }
+
+    /*
+    Check every column to see if there is a Winning Combination
+    */
+    for (int col = 0; col < 3; ++col){
+        if (board[0][col] == board[1][col] && board[1][col] == board[2][col] && strlen(&board[0][col]) != 0){
+            if (board[0][col] == PLAYER){
+                return -1;
+            }
+            else if (board[0][col] == COMPUTER){
+                return 1;
+            }
+        }
+    }
+
+
+    /*
+    Check Left-to-Right downward diagonally to see if there is a Winning Combination
+    */
+    int count = 0;
+    for (int col = 0; col < 3; ++col)
+    {
+        if (board[col][col] == COMPUTER)
+        {
+            count = count + 1;
+        }
+        else if (board[col][col] == PLAYER)
+        {
+            count = count - 1;
+        }
+        else
+        {
+            count = count + 0;
+        }
+    }
+    if (count == 3 || count == -3)
+    {
+        /*
+        Returns either 1 or -1 to declare the appropriate winner
+        */
+        return count / abs(count); 
+    }
+
+    /*
+    Check Left-to-Right upward diagonally to see if there is a Winning Combination
+    */
+    count = 0;
+    for (int col = 0; col < 3; ++col)
+    {
+        if (board[col][2 - col] == COMPUTER)
+        {
+            count = count + 1;
+        }
+        else if (board[col][2 - col] == PLAYER)
+        {
+            count = count - 1;
+        }
+        else
+        {
+            count = count + 0;
+        }
+    }
+    if (count == 3 || count == -3)
+    {
+        /*
+        Returns either 1 or -1 to declare the appropriate winner
+        */
+        return count / abs(count);
+    }
+    
+    return 0;
+}
+
+void announceWinner(int winner, int draw)
+{
+    if (winner == -1)
+    {
+        gtk_label_set_label(GTK_LABEL(announce), "Player 1 has won!");
+        player_1_score = player_1_score + 1;
+        gchar *display;
+        display = g_strdup_printf("%d", player_1_score);
+        gtk_label_set_label(GTK_LABEL(score1), display);
+        g_free(display);
+        disableButtons();
+    }
+    else if (winner == 1)
+    {
+        gtk_label_set_label(GTK_LABEL(announce), "Player 2 has won!");
+        player_2_score = player_2_score + 1;
+        gchar *display;
+        display = g_strdup_printf("%d", player_2_score);
+        gtk_label_set_label(GTK_LABEL(score2), display);
+        g_free(display);
+        disableButtons();
+    }
+    else if (draw == 1 && winner == 0)
+    {
+        gtk_label_set_label(GTK_LABEL(announce), "It's a Draw!");
+        disableButtons();
+    }
+}
+
+void resetBoard()
+{
+    memset(board, 0, sizeof(board));
+    turncounter = 0;
+
+    gtk_label_set_label(GTK_LABEL(announce), " ");
+
+    gtk_button_set_label(GTK_BUTTON(button1), " ");
+    gtk_button_set_label(GTK_BUTTON(button2), " ");
+    gtk_button_set_label(GTK_BUTTON(button3), " ");
+    gtk_button_set_label(GTK_BUTTON(button4), " ");
+    gtk_button_set_label(GTK_BUTTON(button5), " ");
+    gtk_button_set_label(GTK_BUTTON(button6), " ");
+    gtk_button_set_label(GTK_BUTTON(button7), " ");
+    gtk_button_set_label(GTK_BUTTON(button8), " ");
+    gtk_button_set_label(GTK_BUTTON(button9), " ");
+
+    gtk_widget_set_sensitive (button1, TRUE);
+    gtk_widget_set_sensitive (button2, TRUE);
+    gtk_widget_set_sensitive (button3, TRUE);
+    gtk_widget_set_sensitive (button4, TRUE);
+    gtk_widget_set_sensitive (button5, TRUE);
+    gtk_widget_set_sensitive (button6, TRUE);
+    gtk_widget_set_sensitive (button7, TRUE);
+    gtk_widget_set_sensitive (button8, TRUE);
+    gtk_widget_set_sensitive (button9, TRUE);
+}
+
+void resetScore()
+{
+    gtk_label_set_label(GTK_LABEL(score1), "0");
+    gtk_label_set_label(GTK_LABEL(score2), "0");
+    player_1_score = 0;
+    player_2_score = 0;
+}
+
+void resetGame()
+{
+    resetBoard();
+    resetScore();
+}
+
+void disableButtons()
+{
+    gtk_widget_set_sensitive (button1, FALSE);
+    gtk_widget_set_sensitive (button2, FALSE);
+    gtk_widget_set_sensitive (button3, FALSE);
+    gtk_widget_set_sensitive (button4, FALSE);
+    gtk_widget_set_sensitive (button5, FALSE);
+    gtk_widget_set_sensitive (button6, FALSE);
+    gtk_widget_set_sensitive (button7, FALSE);
+    gtk_widget_set_sensitive (button8, FALSE);
+    gtk_widget_set_sensitive (button9, FALSE);
+}
+
+int evaluate()
+{
+    int check_winner;
+    check_winner = checkWinner();
+    if (check_winner == -1)
+    {
+        return -10;
+    }
+    else if (check_winner == 1)
+    {
+        return +10;
+    }
+    else
+    {
+        return 0;
+    }
+
+}
+
+int minimax(int depth, int isMax)
+{
+    int score, spaces_left;
+
+    score = evaluate();
+    
+    if (score == 10)
+    {
+        return score;
+    }
+
+    if (score == -10)
+    {
+        return score;
+    }
+
+    spaces_left = checkFreeSpaces();
+    if (spaces_left == 0)
+    {
+        return 0;
+    }
+
+    if (isMax == 1)
+    {
+        int best = -1000;
+
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                if (strlen(&board[i][j]) == 0)
+                {
+                    board[i][j] = COMPUTER;
+
+                    best = max(best, minimax(depth + 1, !isMax));
+
+                    board[i][j] = 0;
+                }
+            }
+        }
+        return best;
+    }
+    else
+    {
+        int best = 1000;
+
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                if (strlen(&board[i][j]) == 0)
+                {
+                    board[i][j] = PLAYER;
+
+                    best = min(best, minimax(depth + 1, !isMax));
+
+                    board[i][j] = 0;
+                }
+            }
+        }
+        return best;
+    }
+}
+
+void findBestMove()
+{
+    int bestVal = -1000;
+
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            if (strlen(&board[i][j]) == 0)
+            {
+                board[i][j] = COMPUTER;
+
+                int moveVal = minimax(0, 0);
+
+                board[i][j] = 0;
+
+                if (moveVal > bestVal)
+                {
+                    bestMove[0] = i;
+                    bestMove[1] = j;
+                    bestVal = moveVal;
+                }
+            }
+        }
+    }
+
+    printf("The value of the best Move: %d\n\n", bestVal);
+}
+
+int max(int num1, int num2)
+{
+    if (num1 > num2)
+    {
+        return num1;
+    }
+    return num2;
+}
+
+int min(int num1, int num2)
+{
+    if (num1 < num2)
+    {
+        return num1;
+    }
+    return num2;
+}
+
+void setAIDifficulty()
+{
+    if (gamemode == 1)
+    {
+        aiPercentage = 0.0;
+    }
+    else if (gamemode == 2)
+    {
+        aiPercentage = 0.75;
+    }
+    else if (gamemode == 3)
+    {
+        aiPercentage = 1.0;
+    }
+    return;
+}
+
+/* Write a function to calculate the possibility of picking the MiniMax Best Move and a random move on the board */
+
+int getAIDecision()
+{
+    float value;
+    value = (float) rand() / RAND_MAX;
+    printf("\nRandomised Value is:");
+    printf("%f", value);
+
+    if (value <= aiPercentage)
+    {
+        printf("\n Best Move");
+        return 1; /* Return 1 indicates that AI uses MiniMax Algorithm */ 
+    }
+    printf("\n Not Best Move");
+    return 0; /* Return 0 indicates that AI uses a randomiser */
 }

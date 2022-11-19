@@ -94,10 +94,10 @@
     #tttpage{     
       margin-top: 150px;
       margin-bottom: 200px;
-      margin-left: 255px ;
+      margin-left: 260px ;
 
     }
-    #ttt1{
+    #button1{
       padding:30px;
       font-weight: bold;
       background: transparent;
@@ -105,7 +105,7 @@
       color:white;
     }
 
-    #ttt2{
+    #button2{
       padding:30px;
       font-weight: bold;
       background: transparent;
@@ -113,7 +113,7 @@
       color:white;
     }
 
-    #ttt3{
+    #button3{
       padding:30px;
       font-weight: bold;
       background: transparent;
@@ -121,7 +121,7 @@
       color:white;
     }
 
-    #ttt4{   
+    #button4{   
       padding:30px;
       font-weight: bold;
       background: transparent;
@@ -129,7 +129,7 @@
       color:white;
     }
 
-    #ttt5{
+    #button5{
       padding:30px;
       font-weight: bold;
       background: transparent;
@@ -137,7 +137,7 @@
       color:white;
     }
 
-    #ttt6{
+    #button6{
       padding:30px;
       font-weight: bold;
       background: transparent;
@@ -145,21 +145,21 @@
       color:white;
     }
 
-    #ttt7{  
+    #button7{  
       padding:30px;      
       font-weight: bold;
       background: transparent;
       border-color:grey;
       color:white;
     }
-    #ttt8{
+    #button8{
       padding:30px;  
       font-weight: bold;
       background: transparent;
       border-color:grey;
       color:white;
     }
-    #ttt9{
+    #button9{
       padding:30px;
       font-weight: bold;
       background: transparent;
